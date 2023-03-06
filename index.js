@@ -1,6 +1,6 @@
 // import node environment variables
-require("dotenv").config();
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 async function sendEmail(newAnnonces) {
   let transporter = nodemailer.createTransport({
