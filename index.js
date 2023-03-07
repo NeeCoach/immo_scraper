@@ -24,8 +24,7 @@ async function sendEmail(newAnnonces) {
 
 // Fonction pour récupérer les annonces du site immobilier.notaires.fr
 async function getAnnoncesImmobilierNotaire() {
-  const response = await fetch(
-    "https://www.immobilier.notaires.fr/pub-services/inotr-www-annonces/v1/annonces?offset=0&page=1&parPage=12&perimetre=0&typeBiens=MAI&prixMax=275000&typeTransactions=VENTE,VNI,VAE&localites=19043,19119,19085,18971,18992,18999,19142,19134");
+  const response = await fetch("https://www.immobilier.notaires.fr/pub-services/inotr-www-annonces/v1/annonces?offset=0&page=1&parPage=12&perimetre=0&tri=DATE_MODIFICATION_DESC&localiteGlobale=9260&typeBiens=MAI&prixMax=275000&typeTransactions=VENTE,VNI,VAE&localites=19015,19134,19085,19142,18992,19119,19043,18999,18971,19000,38860,38861");
   const jsonResponse = await response.json();
   const annonces = jsonResponse.annonceResumeDto.map((annonce) => {
     annonce.id_unique = `id_immobilier-notaires-fr_${annonce.id}`;
