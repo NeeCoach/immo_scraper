@@ -6,22 +6,18 @@ async function sendEmail(newAnnonces) {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
-    secure: false, 
+    secure: false,
     auth: {
       user: process.env.EMAIL,
-      pass: process.env.PASS, 
+      pass: process.env.PASS,
     },
   });
 
-  let annoncesText = newAnnonces.map((annonce) => {
-    return `Une nouvelle annonce est disponible sur ${annonce.source} : ${annonce.url}\n`;
-  }).join("");
-
-  let info = await transporter.sendMail({
-    from: process.env.EMAIL, 
-    to: process.env.EMAIL, 
+  await transporter.sendMail({
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
     subject: "Nouvelles annonces immobilières disponibles !",
-    text: annoncesText,
+    text: newAnnonces.text,
   });
 }
 
@@ -41,7 +37,7 @@ async function getAnnoncesImmobilierNotaire() {
 
 // Fonction pour récupérer les annonces sur ImmoFCMS
 async function getAnnoncesImmoFCMS() {
-  const response = await fetch("https://fi-classified-search-api.immo.fcms.io/classifieds-with-size?location=nantes%20(44)&location=sautron%20(44)&location=orvault%20(44)&location=saint%20herblain%20(44)&location=cordemais%20(44)&location=vigneux%20de%20bretagne%20(44)&location=saint%20etienne%20de%20montluc%20(44)&location=malville%20(44)&location=heric%20(44)&transaction=vente&types=maison&types=maison+neuve&types=atelier&types=chalet&types=chambre+d%27h%C3%B4te&types=manoir&types=moulin&types=propri%C3%A9t%C3%A9&types=ferme&types=g%C3%AEte&types=villa&sort=5&priceMax=285000&areaMin=60&currentPage=1&pageSize=31", {
+  const response = await fetch("https://fi-classified-search-api.immo.fcms.io/classifieds-with-size?location=nantes%20(44)&location=sautron%20(44)&location=orvault%20(44)&location=saint%20herblain%20(44)&location=cordemais%20(44)&location=vigneux%20de%20bretagne%20(44)&location=saint%20etienne%20de%20montluc%20(44)&location=malville%20(44)&location=heric%20(44)&location=indre%20(44)&transaction=vente&types=maison&types=atelier&types=chalet&types=chambre+d%27h%C3%B4te&types=manoir&types=moulin&types=propri%C3%A9t%C3%A9&types=ferme&types=g%C3%AEte&types=villa&sort=5&priceMax=285000&areaMin=60&currentPage=1&pageSize=31", {
     "headers": {
       "accept": "application/json, text/plain, */*",
       "accept-language": "",
@@ -52,19 +48,21 @@ async function getAnnoncesImmoFCMS() {
       "sec-fetch-mode": "cors",
       "sec-fetch-site": "cross-site",
       "sec-gpc": "1",
-      "x-api-key": process.env.API_KEY,
+      "x-api-key": "AIzaSyDb4PeV9gi5UY_Z3-27ygjOm8PV950j9Us",
       "Referer": "https://immobilier.lefigaro.fr/",
       "Referrer-Policy": "strict-origin-when-cross-origin"
     },
     "body": null,
     "method": "GET"
-  });  const jsonResponse = await response.json();
-  
+  });
+
+  const jsonResponse = await response.json();
+
   let annonces = [];
   annonces = jsonResponse.classifieds.map((annonce) => {
-      annonce.id_unique = `id_figaroimmobilier-fr_${annonce.id}`;
-      return annonce;
-    });
+    annonce.id_unique = `id_figaroimmobilier-fr_${annonce.id}`;
+    return annonce;
+  });
   return annonces;
 }
 
@@ -106,7 +104,6 @@ async function checkNewAnnonces() {
     return;
   }
 
-  console.log(newAnnonces);
 
   await sendEmail({
     subject: "Nouvelles annonces immobilières",
