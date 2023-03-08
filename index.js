@@ -47,7 +47,7 @@ async function getAnnoncesImmoFCMS() {
       "sec-fetch-mode": "cors",
       "sec-fetch-site": "cross-site",
       "sec-gpc": "1",
-      "x-api-key": "AIzaSyDb4PeV9gi5UY_Z3-27ygjOm8PV950j9Us",
+      "x-api-key": `${process.env.API_KEY}`,
       "Referer": "https://immobilier.lefigaro.fr/",
       "Referrer-Policy": "strict-origin-when-cross-origin"
     },
@@ -122,4 +122,4 @@ function getNewAnnonces(lastAnnonces, annonces, id_unique) {
 }
 
 // Vérifier s'il y a de nouvelles annonces toutes les minutes
-setInterval(checkNewAnnonces, 60000);
+setInterval(checkNewAnnonces, 600);
