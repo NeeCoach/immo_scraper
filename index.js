@@ -122,4 +122,4 @@ function getNewAnnonces(lastAnnonces, annonces, id_unique) {
 }
 
 // Vérifier s'il y a de nouvelles annonces toutes les minutes
-setInterval(checkNewAnnonces, 600);
+setInterval(checkNewAnnonces, 60000);
