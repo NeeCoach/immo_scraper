@@ -90,7 +90,7 @@ async function checkNewAnnonces() {
       newAnnonces += `---------------------------------------\n`;
       newAnnonces += `- Ville : ${annonce.localiteNom}\n`;
       newAnnonces += `- Surface : ${annonce.surface} m²\n`;
-      newAnnonces += `- Prix : ${Number(annonce.prixTotal).toFixed()}\n`;
+      newAnnonces += `- Prix : ${Number(annonce.prixTotal).toFixed()} €\n`;
       newAnnonces += `- Lien : ${annonce.urlDetailAnnonceFr}\n\n`;
     });
   }
@@ -102,7 +102,7 @@ async function checkNewAnnonces() {
       newAnnonces += `- Ville : ${annonce.locationNormalized}\n`;
       newAnnonces += `- Surface : ${annonce.area} m²\n`;
       newAnnonces += `- Surface du terrain : ${annonce.areaGround} m²\n`;
-      newAnnonces += `- Prix : ${Number(annonce.priceLabel).toFixed()}\n`;
+      newAnnonces += `- Prix : ${Number(annonce.priceLabel).toFixed()} €\n`;
       newAnnonces += `- Lien : ${annonce.recordLink}\n\n`;
     });
   }
