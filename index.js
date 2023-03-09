@@ -54,11 +54,9 @@ async function getAnnoncesImmoFCMS() {
     "body": null,
     "method": "GET"
   });
-
   const jsonResponse = await response.json();
-
   let annonces = [];
-  annonces = jsonResponse.classifieds.map((annonce) => {
+  annonces = jsonResponse.classifieds.filter((annonce) => !annonce.type.includes("neuve")).map((annonce) => {
     annonce.id_unique = `id_figaroimmobilier-fr_${annonce.id}`;
     return annonce;
   });
@@ -98,11 +96,12 @@ async function checkNewAnnonces() {
   if (immoFCMSNewAnnonces.length > 0) {
     newAnnonces += `\n\nNouvelles annonces sur Figaro Immobilier\n\n\n`;
     immoFCMSNewAnnonces.forEach((annonce) => {
+      console.log(annonce);
       newAnnonces += `---------------------------------------\n`;
       newAnnonces += `- Ville : ${annonce.locationNormalized}\n`;
       newAnnonces += `- Surface : ${annonce.area} m²\n`;
       newAnnonces += `- Surface du terrain : ${annonce.areaGround} m²\n`;
-      newAnnonces += `- Prix : ${Number(annonce.priceLabel).toFixed()} €\n`;
+      newAnnonces += `- Prix : ${Number(annonce.price).toFixed()} €\n`;
       newAnnonces += `- Lien : ${annonce.recordLink}\n\n`;
     });
   }
