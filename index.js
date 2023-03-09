@@ -85,16 +85,25 @@ async function checkNewAnnonces() {
   let newAnnonces = "";
 
   if (notaireNewAnnonces.length > 0) {
-    newAnnonces += `Nouvelles annonces disponibles sur Notaire :\n`;
+    newAnnonces += `\n\nNouvelles annonces sur IMMOBILIER Notaire\n\n\n`;
     notaireNewAnnonces.forEach((annonce) => {
-      newAnnonces += `- ${annonce.urlDetailAnnonceFr}\n`;
+      newAnnonces += `---------------------------------------\n`;
+      newAnnonces += `- Ville : ${annonce.localiteNom}\n`;
+      newAnnonces += `- Surface : ${annonce.surface} m²\n`;
+      newAnnonces += `- Prix : ${Number(annonce.prixTotal).toFixed()}\n`;
+      newAnnonces += `- Lien : ${annonce.urlDetailAnnonceFr}\n\n`;
     });
   }
 
   if (immoFCMSNewAnnonces.length > 0) {
-    newAnnonces += `Nouvelles annonces disponibles sur ImmoFCMS :\n`;
+    newAnnonces += `\n\nNouvelles annonces sur Figaro Immobilier\n\n\n`;
     immoFCMSNewAnnonces.forEach((annonce) => {
-      newAnnonces += `- ${annonce.recordLink}\n`;
+      newAnnonces += `---------------------------------------\n`;
+      newAnnonces += `- Ville : ${annonce.locationNormalized}\n`;
+      newAnnonces += `- Surface : ${annonce.area} m²\n`;
+      newAnnonces += `- Surface du terrain : ${annonce.areaGround} m²\n`;
+      newAnnonces += `- Prix : ${Number(annonce.priceLabel).toFixed()}\n`;
+      newAnnonces += `- Lien : ${annonce.recordLink}\n\n`;
     });
   }
 
