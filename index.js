@@ -36,11 +36,11 @@ async function getAnnoncesImmobilierNotaire() {
 
 // Fonction pour récupérer les annonces sur ImmoFCMS
 async function getAnnoncesImmoFCMS() {
-  const response = await fetch("https://fi-classified-search-api.immo.fcms.io/classifieds-with-size?location=nantes%20(44)&location=sautron%20(44)&location=orvault%20(44)&location=saint%20herblain%20(44)&location=cordemais%20(44)&location=vigneux%20de%20bretagne%20(44)&location=saint%20etienne%20de%20montluc%20(44)&location=malville%20(44)&location=heric%20(44)&location=indre%20(44)&transaction=vente&types=maison&types=atelier&types=chalet&types=chambre+d%27h%C3%B4te&types=manoir&types=moulin&types=propri%C3%A9t%C3%A9&types=ferme&types=g%C3%AEte&types=villa&sort=5&priceMax=285000&areaMin=60&currentPage=1&pageSize=31", {
+  const response = await fetch("https://fi-classified-search-api.immo.fcms.io/classifieds?location=nantes%20(44)&location=coueron%20(44)&location=indre%20(44)&location=cordemais%20(44)&location=saint%20etienne%20de%20montluc%20(44)&location=malville%20(44)&location=sautron%20(44)&location=orvault%20(44)&location=saint%20herblain%20(44)&location=la%20chapelle%20sur%20erdre%20(44)&location=treillieres%20(44)&location=heric%20(44)&location=vertou%20(44)&location=vigneux%20de%20bretagne%20(44)&location=grandchamps%20des%20fontaines%20(44)&transaction=vente&types=maison&originSite=figimmo&sort=5&priceMax=285000&areaMin=60&groundAreaMin=40&path=/annonces/immobilier-vente-maison-nantes+44000.html&currentPage=1&pageSize=31", {
     "headers": {
       "accept": "application/json, text/plain, */*",
       "accept-language": "",
-      "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Brave\";v=\"110\"",
+      "sec-ch-ua": "\"Brave\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"",
       "sec-ch-ua-mobile": "?0",
       "sec-ch-ua-platform": "\"macOS\"",
       "sec-fetch-dest": "empty",
@@ -54,6 +54,7 @@ async function getAnnoncesImmoFCMS() {
     "body": null,
     "method": "GET"
   });
+  
   const jsonResponse = await response.json();
   let annonces = [];
   annonces = jsonResponse.classifieds.filter((annonce) => !annonce.type.includes("neuve")).map((annonce) => {
