@@ -1,4 +1,4 @@
-import { ApiResponse } from "./IAds";
+import { ApiResponse } from "./IAPIResponse";
 
 const ouestFranceScrapper = async (url: string) => {
   const response = await fetch(url, {
@@ -14,6 +14,7 @@ const ouestFranceScrapper = async (url: string) => {
     method: "GET",
   });
   const ouestResponse = (await response.json()) as ApiResponse;
+  console.log(ouestResponse.data);
   return ouestResponse.data;
 };
 
